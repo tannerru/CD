@@ -6,17 +6,17 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: https://github.com/argoproj/argo-cd.git
+      repoURL: https://github.com/tannerru/K3s_Manifests.git
       revision: HEAD
       directories:
-      - path: applicationset/examples/git-generator-directory/cluster-addons/*
+      - path: K3s_Manifests/argocd/*
   template:
     metadata:
       name: '{{path.basename}}'
     spec:
-      project: "my-project"
+      project: "default"
       source:
-        repoURL: https://github.com/argoproj/argo-cd.git
+        repoURL: https://github.com/tannerru/K3s_Manifests.git
         targetRevision: HEAD
         path: '{{path}}'
       destination:
@@ -24,4 +24,4 @@ spec:
         namespace: '{{path.basename}}'
       syncPolicy:
         syncOptions:
-        - CreateNamespace=true
+        - CreateNamespace=false
