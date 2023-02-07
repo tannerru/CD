@@ -9,7 +9,7 @@ spec:
       repoURL: https://github.com/tannerru/K3s_Manifests.git
       revision: HEAD
       directories:
-      - path: K3s_Manifests/argocd/*
+      - path: /*
   template:
     metadata:
       name: '{{path.basename}}'
