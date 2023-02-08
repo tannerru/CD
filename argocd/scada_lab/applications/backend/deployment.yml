@@ -40,6 +40,6 @@ spec:
               mountPath: /usr/local/bin/ignition/data
 
       Volumes:
-        - name: scadabackend-data
-          persistentVolumeClaim:
-             claimName: scadabackend-data
+         - name: scadabackend-data
+           persistentVolumeClaim:
+              claimName: scadabackend-data
