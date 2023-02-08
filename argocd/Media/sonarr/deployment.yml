@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sonarr
+  namespace: media
+  labels:
+    dep: sonarr-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sonarr
+  template:
+    metadata:
+      labels:
+        app: sonarr
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan-conf
+      
+    spec:
+      containers:
+        - name: sonarr
+          
+          image: linuxserver/sonarr
+          resources:
+            requests: 
+              memory: 2Gi
+              cpu: 1000m
+            limits:
+              memory: 4Gi
+              cpu: 2000m
+          ports:
+            - containerPort: 8989
+          volumeMounts:
+            - name: media
+              mountPath: /media
+
+            - name: config
+              mountPath: /config
+
+      volumes:
+        - name: media
+          nfs:
+            server: 10.0.50.4
+            path: /mnt/Slow/Media
+
+        - name: config
+          persistentVolumeClaim:
+             claimName: sonarr-config
