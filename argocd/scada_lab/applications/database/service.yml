@@ -24,7 +24,7 @@ metadata:
     readonly: "true"
 spec:
   ports:
-  - name: mariadb
+  - name: mariadb-port
     port: 3306
   selector:
     app: mariadb
