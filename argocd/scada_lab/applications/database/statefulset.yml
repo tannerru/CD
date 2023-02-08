@@ -1,69 +1,10 @@
-# ConfigMap holding information about configuration files for primary/secondary and dockerinit
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: mariadb-configmap
-data:
-
-  primary.cnf: |
-    [mariadb]
-    log-bin                         # enable binary logging
-    log-basename=my-mariadb         # used to be independent of hostname changes (otherwise is in datadir/mysql)
-
-  replica.cnf: |
-    [mariadb]
-    log-basename=my-mariadb         # used to be independent of hostname changes (otherwise is in datadir/mysql)
-
-  primary.sql: |
-    CREATE USER 'repluser'@'%' IDENTIFIED BY 'replsecret';
-    GRANT REPLICATION REPLICA ON *.* TO 'repluser'@'%';
-    CREATE DATABASE primary_db;
-
-  secondary.sql: |
-    # We have to know name of sts (`mariadb-sts`) and 
-    # service `mariadb-service` in advance as an FQDN.
-    # No need to use master_port
-    CHANGE MASTER TO 
-    MASTER_HOST='mariadb-sts-0.mariadb-service.default.svc.cluster.local',
-    MASTER_USER='repluser',
-    MASTER_PASSWORD='replsecret',
-    MASTER_CONNECT_RETRY=10;
-
-# Secret holds information about root password
----
-apiVersion: v1
-kind: Secret
-metadata:
-    name: mariadb-secret
-type: Opaque
-data:
-  mariadb-root-password: c2VjcmV0 # echo -n 'secret'|base64
-
-# Headless service
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: mariadb-service
-  labels:
-    app: mariadb
-spec:
-  ports:
-  - port: 3306
-    name: mariadb-port
-  clusterIP: None
-  selector:
-    app: mariadb
-
-# Statefulset
----
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mariadb-sts
 spec:
   serviceName: "mariadb-service"
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: mariadb
@@ -152,6 +93,7 @@ spec:
       name: datadir
     spec:
       accessModes: [ "ReadWriteOnce" ]
+      storageClassName: longhorn
       resources:
         requests:
-          storage: 300M
+          storage: 10Gi
