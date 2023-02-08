@@ -26,4 +26,4 @@ spec:
   selector:    
     app: scada-backend
   type: LoadBalancer
-  loadBalancerIP: 10.0.40.17
+  loadBalancerIP: 10.0.40.171
