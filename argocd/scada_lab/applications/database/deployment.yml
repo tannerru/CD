@@ -31,7 +31,7 @@ spec:
       volumeClaimTemplates:
        - metadata:
          name: scadadb-data
-      spec:
+         spec:
           accessModes: ["ReadWriteOnce"]
           resources:
             requests:
