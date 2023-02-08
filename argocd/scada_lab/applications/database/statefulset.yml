@@ -4,7 +4,7 @@ metadata:
   name: mariadb-sts
 spec:
   serviceName: "mariadb-service"
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: mariadb
