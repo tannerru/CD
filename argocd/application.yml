@@ -8,13 +8,13 @@ spec:
   - git:
       repoURL: https://github.com/tannerru/K3s_Manifests.git
       revision: HEAD
-      directory:
-        recurse: true
+      directories:
+      - path: argocd/*
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path[0]}}'
     spec:
-      project: "default"
+      project: default
       source:
         repoURL: https://github.com/tannerru/K3s_Manifests.git
         targetRevision: HEAD
@@ -22,6 +22,4 @@ spec:
       destination:
         server: https://kubernetes.default.svc
         namespace: '{{path.basename}}'
-      syncPolicy:
-        syncOptions:
-        - CreateNamespace=false
+    
