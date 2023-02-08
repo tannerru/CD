@@ -35,9 +35,7 @@ spec:
           - name: port8060
             containerPort: 8060
           
-          command:
-           - n frontend-gateway -a 127.0.0.1 -h 8088 -s 8043
-       
+          
           volumeMounts:
             - name: scadafrontend-data
               mountPath: /usr/local/bin/ignition/data
