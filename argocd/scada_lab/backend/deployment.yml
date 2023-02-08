@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scada-backend
+  namespace: scada
+  labels:
+    dep: scadabackend-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scada-backend
+  template:
+    metadata:
+      labels:
+        app: scada-backend
+      
+    spec:
+      containers:
+        - name: scada-backend
+          
+          image: inductiveautomation/ignition:8.1.0
+          resources:
+            requests: 
+              memory: 2Gi
+              cpu: 1000m
+            limits:
+              memory: 4Gi
+              cpu: 2000m
+          ports:
+          - name: port8088
+            containerPort: 8088
+          - name: port8043
+            containerPort: 8043
+          - name: port8060
+            containerPort: 8060
+       
+          volumeMounts:
+            - name: scadabackend-data
+              mountPath: /usr/local/bin/ignition/data
+
+  
+        - name: scadabackend-data
+          persistentVolumeClaim:
+             claimName: scadabackend-data

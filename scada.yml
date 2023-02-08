@@ -1,0 +1,52 @@
+
+    command:
+
+      -n backend-gateway -a 127.0.0.1
+
+    volumes:
+
+      - backend-gateway-data:/usr/local/bin/ignition/data
+
+ 
+
+  frontend-gateway:
+
+    image: inductiveautomation/ignition:8.1.0
+
+    ports:
+
+    - "9088:8088"
+
+    - "9043:8043"
+
+    - "9060:8060"
+
+    command:
+
+      -n frontend-gateway -a 127.0.0.1 -h 9088 -s 9043
+
+    volumes:
+
+      - frontend-gateway-data:/usr/local/bin/ignition/data
+
+ 
+
+  ignition-db:
+
+    image: mariadb:10.5.8
+
+    restart: always
+
+    environment:
+
+      MSQL_ROOT_PASSWORD: password
+
+      MYSQL_DATABASE: ignition
+
+ 
+
+volumes:
+
+    backend-gateway-data: {}
+
+    frontend-gateway-data: {}
