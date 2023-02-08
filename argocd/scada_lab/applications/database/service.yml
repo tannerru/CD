@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scadadb-service
+  
+  namespace: scada
+  labels:
+    app: scadadb_service
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: port3060
+    port: 3060
+    protocol: TCP
+    targetPort: 3060
+
+ 
+    
+  selector:    
+    app: scada-db
+  type: LoadBalancer
+  loadBalancerIP: 10.0.40.172

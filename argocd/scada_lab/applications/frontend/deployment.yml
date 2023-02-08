@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scada-frontend
+  namespace: scada
+  labels:
+    dep: scadafrontend-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scada-frontend
+  template:
+    metadata:
+      labels:
+        app: scada-frontend
+      
+    spec:
+      containers:
+        - name: scada-frontend
+          
+          image: inductiveautomation/ignition:8.1.0
+          resources:
+            requests: 
+              memory: 2Gi
+              cpu: 1000m
+            limits:
+              memory: 4Gi
+              cpu: 2000m
+          ports:
+          - name: port8088
+            containerPort: 8088
+          - name: port8043
+            containerPort: 8043
+          - name: port8060
+            containerPort: 8060
+       
+          volumeMounts:
+            - name: scadafrontend-data
+              mountPath: /usr/local/bin/ignition/data
+
+      volumes:
+         - name: scadafrontend-data
+           persistentVolumeClaim:
+              claimName: scadafrontend-data

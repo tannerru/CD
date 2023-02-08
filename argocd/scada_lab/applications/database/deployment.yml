@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scada-db
+  namespace: scada
+  labels:
+    dep: scadadb-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: scada-db
+  template:
+    metadata:
+      labels:
+        app: scada-db
+      
+    spec:
+      containers:
+        - name: scada-db
+          
+          image: mariadb:10.5.8
+          resources:
+            requests: 
+              memory: 2Gi
+              cpu: 1000m
+            limits:
+              memory: 4Gi
+              cpu: 2000m
+          ports:
+          - name: port8088
+            containerPort: 3060
+         
+       
+          volumeMounts:
+            - name: scadadb-data
+              mountPath: /var/lib/mysql
+
+      volumes:
+         - name: scadadb-data
+           persistentVolumeClaim:
+              claimName: scadadb-data
