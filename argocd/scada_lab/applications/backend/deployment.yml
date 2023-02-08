@@ -22,11 +22,11 @@ spec:
           image: inductiveautomation/ignition:8.1.0
           resources:
             requests: 
+              memory: 1Gi
+              cpu: 500m
+            limits:
               memory: 2Gi
               cpu: 1000m
-            limits:
-              memory: 4Gi
-              cpu: 2000m
           ports:
           - name: port8088
             containerPort: 8088
