@@ -15,7 +15,7 @@ spec:
     spec:
       initContainers:
       - name: init-mariadb
-        image: mariadb
+        image: mariadb:latest
         imagePullPolicy: Always
         command:
         - bash
