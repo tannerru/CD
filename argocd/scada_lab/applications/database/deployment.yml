@@ -16,7 +16,7 @@ spec:
       terminationGracePeriodSeconds: 10
       containers:
       - name: mariadb
-        image: mariadb:10.5.8
+        image: mariadb:latest
         ports:
         - containerPort: 3306
         volumeMounts:
