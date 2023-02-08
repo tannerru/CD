@@ -28,7 +28,7 @@ spec:
               secretKeyRef:
                 name: mariadb-password
                 key: MARIADB_ROOT_PASSWORD
-  volumes:
+      volumes:
          - name: scadadb-data
            persistentVolumeClaim:
               claimName: scadadb-data
