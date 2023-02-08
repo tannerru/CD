@@ -19,7 +19,7 @@ spec:
     targetPort: 8043
   - name: port8060
     port: 8060
-    protocol: UDP
+    protocol: TCP
     targetPort: 8060
  
     
