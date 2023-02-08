@@ -1,42 +1,34 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: scada-db
-  namespace: scada
-  labels:
-    dep: scadadb-deploy
+  name: mariadb-set
 spec:
-  replicas: 1
   selector:
     matchLabels:
-      app: scada-db
+      app: mariadb
+  serviceName: "mariadb"
+  replicas: 1
   template:
     metadata:
       labels:
-        app: scada-db
-      
+        app: mariadb
     spec:
+      terminationGracePeriodSeconds: 10
       containers:
-        - name: scada-db
-          
-          image: mariadb:10.5.8
-          resources:
-            requests: 
-              memory: 2Gi
-              cpu: 500m
-            limits:
-              memory: 2Gi
-              cpu: 1000m
-          ports:
-          - name: port8088
-            containerPort: 3060
-         
-       
-          volumeMounts:
-            - name: scadadb-data
-              mountPath: /var/lib/mysql
-
-      volumes:
+      - name: mariadb
+        image: mariadb:10.5.8
+        ports:
+        - containerPort: 3306
+        volumeMounts:
+        - name: scadadb-data
+          mountPath: /var/lib/mysql
+        env:
+          - name: MARIADB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mariadb-password
+                key: MARIADB_ROOT_PASSWORD
+  volumes:
          - name: scadadb-data
            persistentVolumeClaim:
               claimName: scadadb-data
