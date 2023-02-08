@@ -16,7 +16,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mariad-read
+  name: mariadb-read
   labels:
     app: mariadb
     app.kubernetes.io/name: mariadb
