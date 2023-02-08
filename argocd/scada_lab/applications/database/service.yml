@@ -12,19 +12,3 @@ spec:
   selector:
     app: mariadb
 
----
-
-apiVersion: v1
-kind: Service
-metadata:
-  name: mariadb-read
-  labels:
-    app: mariadb
-    app.kubernetes.io/name: mariadb
-    readonly: "true"
-spec:
-  ports:
-  - name: mariadb-port
-    port: 3306
-  selector:
-    app: mariadb

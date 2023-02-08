@@ -20,3 +20,21 @@ kubectl exec --stdin --tty shell-demo -- /bin/bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 argocd login 10.0.40.160
 argocd account update-password
+
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-read
+  labels:
+    app: mariadb
+    app.kubernetes.io/name: mariadb
+    readonly: "true"
+spec:
+  ports:
+  - name: mariadb-port
+    port: 3306
+  selector:
+    app: mariadb
