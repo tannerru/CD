@@ -28,11 +28,11 @@ spec:
               secretKeyRef:
                 name: mariadb-password
                 key: MARIADB_ROOT_PASSWORD
-      volumeClaimTemplates:
-       - metadata:
-         name: scadadb-data
-         spec:
-          accessModes: ["ReadWriteOnce"]
-          resources:
-            requests:
-              storage: 10Gi
+        volumeClaimTemplates:
+           - metadata:
+               name: scadadb-data
+             spec:
+               accessModes: ["ReadWriteOnce"]
+               resources:
+                 requests:
+                   storage: 10Gi
