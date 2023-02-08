@@ -19,7 +19,7 @@ spec:
       containers:
         - name: scada-backend
           
-          image: inductiveautomation/ignition:8.1.0
+          image: kcollins/ignition:latest
           resources:
             requests: 
               memory: 1Gi
