@@ -6,7 +6,7 @@ metadata:
   labels:
     dep: scadabackend-deploy
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
       app: scada-backend
