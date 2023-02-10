@@ -39,10 +39,6 @@ spec:
           limits:
             memory: "4096Mi"
             cpu: "1000m"
-        args:
-        - "4096"
-        - -n
-        - "Ignition-Enterprise"
         env:
         - name: ACCEPT_IGNITION_EULA
           value: "Y"
