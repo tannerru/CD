@@ -36,7 +36,7 @@ spec:
        
           volumeMounts:
             - name: scadabackend-data
-              mountPath: /var/lib/ignition/data
+              mountPath: /usr/local/bin/ignition/data
 
       volumes:
          - name: scadabackend-data
