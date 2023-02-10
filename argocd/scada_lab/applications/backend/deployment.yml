@@ -15,26 +15,7 @@ spec:
         app: scada-backend
       
     spec:
-     initContainers:
-      - name: seed-volume
-        image: kcollins/ignition:latest
-        resources:
-          limits:
-            memory: "256Mi"
-            cpu: "1000m"
-        command:
-        - sh
-        - -c
-        - >
-          if [ ! -f /data/.ignition-seed-complete ]; then
-            touch /data/.ignition-seed-complete ;
-            cp -dpR /usr/local/bin/ignition/data/* /data/ ;
-          fi
-        volumeMounts:
-        - mountPath: /data
-          name: scadabackend-data
-
-    containers:
+      containers:
         - name: scada-backend
           
           image: kcollins/ignition:latest
@@ -45,13 +26,6 @@ spec:
             limits:
               memory: 2Gi
               cpu: 1000m
-          env:
-          - name: ACCEPT_IGNITION_EULA
-            value: "Y"
-          - name: test
-            value: “America/Chicago”
-          - name: IGNITION_EDITION
-            value: standard
           ports:
           - name: port8088
             containerPort: 8088
@@ -63,17 +37,8 @@ spec:
           volumeMounts:
             - name: scadabackend-data
               mountPath: /usr/local/bin/ignition/data
-          readinessProbe:
-              exec:
-                command:
-                - health-check.sh
-                - -t
-                - "3"
-              initialDelaySeconds: 60
-              periodSeconds: 10
-              failureThreshold: 10
-              timeoutSeconds: 3
-    volumes:
+
+      volumes:
          - name: scadabackend-data
            persistentVolumeClaim:
               claimName: scadabackend-data
