@@ -9,5 +9,5 @@ spec:
   scaleTargetRef:
     apiVersion: extensions/v1beta1
     kind: Deployment
-    name: scadabackend-deploy
+    name: scadabackend
   targetCPUUtilizationPercentage: 20
