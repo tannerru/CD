@@ -37,13 +37,14 @@ metadata:
   name: kubernetes-dashboard
   namespace: kubernetes-dashboard
 spec:
+  externalTrafficPolicy: Cluster
   ports:
     - port: 443
       targetPort: 8443
   selector:
     k8s-app: kubernetes-dashboard
-    type: LoadBalancer
-    loadBalancerIP: 10.0.40.175
+  type: LoadBalancer
+  loadBalancerIP: 10.0.40.175
 
 ---
 
