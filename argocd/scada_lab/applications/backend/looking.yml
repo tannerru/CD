@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        app: scadabackend
+        app: scada-backend
     spec:
       initContainers:
       - name: seed-volume
