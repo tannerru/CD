@@ -10,4 +10,4 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: scada-backend
-  targetmemoryUtilizationPercentage: 1
+  targetCPUUtilizationPercentage: 50
