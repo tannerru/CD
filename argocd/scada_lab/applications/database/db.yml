@@ -46,8 +46,13 @@ spec:
         volumeMounts:
         - name: mariadb-data
           mountPath: /var/lib/mysql
-      volumes:
-        - name: mariadb-data
-          persistentVolumeClaim:
-           claimName: mariadb-data
+    volumeClaimTemplates:
+    - metadata:
+        name: datadir
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        storageClassName: longhorn
+        resources:
+          requests:
+            storage: 300M
 
