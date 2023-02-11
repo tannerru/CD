@@ -21,7 +21,7 @@ spec:
         - -c
         - |
           set -e
-          echo "CREATE DATABASE ignition_db;" | mysql --user=root --password=password --host=mariadb
+          echo "CREATE DATABASE ignition_db;" | mysql --user=root --password=password --host=mariadb || echo "Error creating database"
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: password
