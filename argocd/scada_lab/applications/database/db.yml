@@ -15,19 +15,19 @@ spec:
     spec:
       initContainers:
       - name: create-database
-        image: mariadb:latest
+        image: mariadb:10.5.5
         command:
         - sh
         - -c
         - |
           set -e
-          echo "CREATE DATABASE ignition_db;" | mysql --user=root --password=password --host=mariadb || echo "Error creating database"
+          echo "CREATE DATABASE ignition_db;" | mysql --user=root --password=password --host=mariadb
         env:
         - name: MYSQL_ROOT_PASSWORD
           value: password
       containers:
       - name: mariadb
-        image: mariadb:latest
+        image: mariadb:10.5.5
         ports:
         - containerPort: 3306
         env:
@@ -48,11 +48,10 @@ spec:
           mountPath: /var/lib/mysql
   volumeClaimTemplates:
   - metadata:
-        name: datadir
+      name: mariadb-data
     spec:
-        accessModes: [ "ReadWriteOnce" ]
-        storageClassName: longhorn
-        resources:
-          requests:
-            storage: 300M
-
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: longhorn
+      resources:
+        requests:
+          storage: 1Gi
