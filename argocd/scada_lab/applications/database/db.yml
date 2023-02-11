@@ -51,7 +51,7 @@ spec:
       name: mariadb-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
-      storageClassName: standard
+      storageClassName: longhorn
       resources:
         requests:
           storage: 1Gi
