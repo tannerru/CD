@@ -73,7 +73,7 @@ spec:
     spec:
       initContainers:
       - name: init-mariadb
-        image: mariadb
+        image: mariadb:latest
         imagePullPolicy: Always
         command:
         - bash
@@ -115,7 +115,7 @@ spec:
       restartPolicy: Always
       containers:
       - name: mariadb
-        image: mariadb
+        image: mariadb:latest
         ports:
         - containerPort: 3306
           name: mariadb-port
