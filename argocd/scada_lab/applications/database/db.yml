@@ -15,7 +15,7 @@ spec:
     spec:
       initContainers:
       - name: create-database
-        image: mariadb:10.5.5
+        image: mariadb:latest
         command:
         - sh
         - -c
@@ -27,7 +27,7 @@ spec:
           value: password
       containers:
       - name: mariadb
-        image: mariadb:10.5.5
+        image: mariadb:latest
         ports:
         - containerPort: 3306
         env:

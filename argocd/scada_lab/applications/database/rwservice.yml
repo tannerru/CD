@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-service
+  labels:
+    app: mariadb-replication
+spec:
+  ports:
+  - port: 3306
+    name: mariadb-port
+  clusterIP: None
+  selector:
+    app: mariadb-replication
