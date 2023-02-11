@@ -52,7 +52,7 @@ spec:
         - name: ignition-https
           containerPort: 8043
         volumeMounts:
-        - mountPath: /usr/local/bin/ignition/data
+        - mountPath: /data
           name: scadabackend-data
         readinessProbe:
           exec:
