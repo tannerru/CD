@@ -16,7 +16,7 @@ spec:
     spec:
       initContainers:
       - name: seed-volume
-        image: kcollins/ignition:latest
+        image: inductiveautomation/ignition:8.1.17
         resources:
           limits:
             memory: "256Mi"
@@ -34,7 +34,7 @@ spec:
           name: scadabackend-data
       containers:
       - name: scada-backend
-        image: kcollins/ignition:latest
+        image: inductiveautomation/ignition:8.1.17
         resources:
           limits:
             memory: "4096Mi"
