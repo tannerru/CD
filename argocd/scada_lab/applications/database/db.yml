@@ -46,8 +46,8 @@ spec:
         volumeMounts:
         - name: mariadb-data
           mountPath: /var/lib/mysql
-  volumes:
-      - name: mariadb-data
-        persistentVolumeClaim:
-         claimName: mariadb-data
+      volumes:
+        - name: mariadb-data
+          persistentVolumeClaim:
+           claimName: mariadb-data
 
