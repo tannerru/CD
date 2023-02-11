@@ -13,18 +13,7 @@ spec:
       labels:
         app: mysql-replication
     spec:
-      initContainers:
-      - name: create-database
-        image: mysql:8.0
-        command:
-        - sh
-        - -c
-        - |
-          set -e
-          echo "CREATE DATABASE ignition_db;" | mysql --user=root --password=password --host=mysql
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: password
+   
       containers:
       - name: mysql
         image: mysql:8.0
