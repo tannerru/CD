@@ -327,6 +327,7 @@ spec:
     spec:
 
       accessModes: ["ReadWriteOnce"]
+      storageClassName: longhorn
 
       resources:
 
