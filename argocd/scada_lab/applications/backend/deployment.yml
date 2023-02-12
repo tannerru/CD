@@ -41,9 +41,6 @@ spec:
             memory: "4096Mi"
             cpu: "1000m"
         
-        command:
-        - n "ignition-backend"
-        - m "2096"
         env:
         - name: ACCEPT_IGNITION_EULA
           value: "Y"
