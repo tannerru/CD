@@ -4,7 +4,7 @@ metadata:
   name: scada-backend
   namespace: scada
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: scada-backend
@@ -65,7 +65,12 @@ spec:
           periodSeconds: 10
           failureThreshold: 10
           timeoutSeconds: 3
-      volumes:
-      - name: scadabackend-data
-        persistentVolumeClaim:
-         claimName: scadabackend-data
+      volumeClaimTemplates:
+      - metadata:
+         name: scadabackend-data
+      spec:
+         accessModes: [ "ReadWriteMany" ]
+         storageClassName: longhorn
+         resources:
+         requests:
+           storage: 10Gi
