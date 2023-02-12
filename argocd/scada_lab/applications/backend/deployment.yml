@@ -4,7 +4,7 @@ metadata:
   name: scada-backend
   namespace: scada
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: scada-backend
@@ -50,6 +50,8 @@ spec:
           value: standard
         - name: GATEWAY_ADMIN_PASSWORD
           value: password
+        - name: EAM_SETUP_INSTALLSELECTION
+          value: Controller
         ports:
         - name: ignition-http
           containerPort: 8088
