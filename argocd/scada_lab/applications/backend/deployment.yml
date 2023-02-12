@@ -15,24 +15,7 @@ spec:
       labels:
         app: scada-backend
     spec:
-      initContainers:
-      - name: seed-volume
-        image: inductiveautomation/ignition:8.1.17
-        resources:
-          limits:
-            memory: "256Mi"
-            cpu: "1000m"
-        command:
-        - sh
-        - -c
-        - >
-          if [ ! -f /data/.ignition-seed-complete ]; then
-            touch /data/.ignition-seed-complete ;
-            cp -dpR /usr/local/bin/ignition/data/* /data/ ;
-          fi
-        volumeMounts:
-        - mountPath: /data
-          name: scadabackend-data
+      
       containers:
       - name: scada-backend
         image: inductiveautomation/ignition:8.1.17
