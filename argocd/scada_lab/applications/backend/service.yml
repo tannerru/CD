@@ -5,7 +5,7 @@ metadata:
   
   namespace: scada
   labels:
-    app: scadabackend_service
+    app: backend-sts
 spec:
   externalTrafficPolicy: Cluster
   ports:
