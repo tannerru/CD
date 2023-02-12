@@ -23,6 +23,8 @@ spec:
             memory: "256Mi"
             cpu: "1000m"
         command:
+        - n ignition-backend
+        - m 2096
         - sh
         - -c
         - >
@@ -60,8 +62,6 @@ spec:
         readinessProbe:
           exec:
             command:
-            - n ignition-backend
-            - m 2096
             - health-check.sh
             - -t
             - "3"
