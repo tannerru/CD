@@ -28,7 +28,7 @@ spec:
             touch /data/.ignition-seed-complete ;
             cp -dpR /usr/local/bin/ignition/data/* /data/ ;
           fi
-        volumeMounts:
+      volumeMounts:
         - mountPath: /data
           name: scadabackend-data
       containers:
@@ -46,7 +46,7 @@ spec:
           value: “America/Chicago”
         - name: IGNITION_EDITION
           value: standard
-          volumeMounts:
+        volumeMounts:
         - mountPath: /usr/local/bin/ignition/data
           name: scadabackend-data
 
