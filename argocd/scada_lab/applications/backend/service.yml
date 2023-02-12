@@ -25,6 +25,6 @@ spec:
     
   selector:    
     app: scada-backend
-  sessuionAffinity: ClientIP
+  sessionAffinity: ClientIP
   type: LoadBalancer
   loadBalancerIP: 10.0.40.170
