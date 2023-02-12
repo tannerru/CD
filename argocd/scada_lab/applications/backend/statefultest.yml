@@ -46,7 +46,7 @@ spec:
           value: “America/Chicago”
         - name: IGNITION_EDITION
           value: standard
-        volumeMounts:
+        volumes:
         - mountPath: /usr/local/bin/ignition/data
           name: scadabackend-data
 
