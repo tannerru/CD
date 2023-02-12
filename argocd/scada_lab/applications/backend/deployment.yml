@@ -65,12 +65,7 @@ spec:
           periodSeconds: 10
           failureThreshold: 10
           timeoutSeconds: 3
-  volumeClaimTemplates:
-  - metadata:
-      name: scadabackend-data
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      storageClassName: longhorn
-      resources:
-        requests:
-          storage: 300M10Gi
+      volumes:
+      - name: scadabackend-data
+        persistentVolumeClaim:
+         claimName: scadabackend-data
