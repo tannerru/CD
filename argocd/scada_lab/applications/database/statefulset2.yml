@@ -84,7 +84,7 @@ spec:
 
       - name: clone-mysql
 
-        image: gcr.io/google-samples/xtrabackup:1.0
+        image: gcr.io/google-samples/xtrabackup:latest
 
         command:
 
@@ -194,7 +194,7 @@ spec:
 
       - name: xtrabackup
 
-        image: gcr.io/google-samples/xtrabackup:1.0
+        image: gcr.io/google-samples/xtrabackup:latest
 
         ports:
 
