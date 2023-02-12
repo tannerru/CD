@@ -1,13 +1,15 @@
 apiVersion: apps/v1
-kind: StatefulSet
+kind: Deployment
 metadata:
   name: scada-backend
+  namespace: scada
 spec:
-  serviceName: "scadabackend-service"
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: scada-backend
+  strategy:
+    type: Recreate
   template:
     metadata:
       labels:
