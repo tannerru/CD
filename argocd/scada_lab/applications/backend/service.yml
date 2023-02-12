@@ -5,7 +5,7 @@ metadata:
   
   namespace: scada
   labels:
-    app: backend-sts
+    app: scadabackend_service
 spec:
   externalTrafficPolicy: Cluster
   ports:
@@ -24,6 +24,6 @@ spec:
  
     
   selector:    
-    app: backend-sts
+    app: scada-backend
   type: LoadBalancer
   loadBalancerIP: 10.0.40.170

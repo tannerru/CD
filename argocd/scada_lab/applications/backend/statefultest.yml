@@ -1,17 +1,17 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: backend-sts
+  name: scada-backend
 spec:
   serviceName: "scadabackend-service"
   replicas: 1
   selector:
     matchLabels:
-      app: scadabackend
+      app: scada-backend
   template:
     metadata:
       labels:
-        app: scadabackend
+        app: scada-backend
     spec:
       initContainers:
       - name: seed-volume
