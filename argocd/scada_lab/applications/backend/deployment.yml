@@ -47,6 +47,8 @@ spec:
           value: “America/Chicago”
         - name: IGNITION_EDITION
           value: standard
+        - name: GATEWAY_ADMIN_PASSWORD
+          value: password
         ports:
         - name: ignition-http
           containerPort: 8088
@@ -58,6 +60,8 @@ spec:
         readinessProbe:
           exec:
             command:
+            - n ignition-backend
+            - m 2096
             - health-check.sh
             - -t
             - "3"
