@@ -38,3 +38,9 @@ spec:
     port: 3306
   selector:
     app: mariadb
+
+
+
+
+
+    To restore longhorn backup, disable argocD auto sync, delete the app/stateful set, restore the disaster recovery volume, activate, create pvc with previous name, sync
