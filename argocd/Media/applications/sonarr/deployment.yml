@@ -21,7 +21,7 @@ spec:
       containers:
         - name: sonarr
           
-          image: linuxserver/sonarr
+          image: 322355661708.dkr.ecr.us-east-2.amazonaws.com/testing:sonarr
           resources:
             requests: 
               memory: 2Gi
