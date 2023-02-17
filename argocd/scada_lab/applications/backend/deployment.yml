@@ -57,6 +57,8 @@ spec:
           containerPort: 8088
         - name: ignition-https
           containerPort: 8043
+        - name: port8060
+          containerPort: 8060
         volumeMounts:
         - mountPath: /usr/local/bin/ignition/data
           name: scadabackend-data
