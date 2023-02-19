@@ -18,8 +18,10 @@ spec:
       
     spec:
       containers:
+      -env:
+        - name: WEBPASSWORD
+          value: password1
         - name: pihole
-          
           image: pihole/pihole
           resources:
             requests: 
