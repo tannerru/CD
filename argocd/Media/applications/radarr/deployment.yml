@@ -38,19 +38,13 @@ spec:
             - name: config
               mountPath: /config
 
-            - name: jellyfin
-              mountPath: /tmp
-
       volumes:
         - name: media
           nfs:
             server: 10.0.50.4
             path: /mnt/Slow/Media
 
-        - name: jellyfin
-          persistentVolumeClaim:
-            claimName: jellyfin-config
-            
+        
         - name: config
           persistentVolumeClaim:
              claimName: radarr-config
