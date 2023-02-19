@@ -26,10 +26,7 @@ spec:
         - name: ServerIP
           value: 10.0.40.166
         - name: WEBPASSWORD
-          valueFrom:
-            secretKeyRef:
-              key: password
-              name: pihole-webpassword
+          value: password
         image: pihole/pihole
         imagePullPolicy: IfNotPresent
         name: pihole
