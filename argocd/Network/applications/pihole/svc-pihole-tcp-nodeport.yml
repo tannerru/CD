@@ -6,19 +6,17 @@ metadata:
   name: pihole-tcp
   namespace: default
 spec:
-  externalTrafficPolicy: Local
+  externalTrafficPolicy: Cluster
   ports:
   - name: dns
-    targetPort: dns
     protocol: TCP
     port: 53
     targetPort: dns
   - name: pihole-http
     port: 80
-    nodePort: 30007
     protocol: TCP
     targetPort: pihole-http
   selector:
     app: pihole
   sessionAffinity: None
-  type: NodePort
+  type: LoadBalancer
