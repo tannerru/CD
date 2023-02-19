@@ -1,0 +1,25 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: network
+  namespace: network
+spec:
+  generators:
+  - git:
+      repoURL: https://github.com/tannerru/K3s_Manifests.git
+      revision: HEAD
+      directories:
+      - path: applications/*
+  template:
+    metadata:
+      name: '{{path.basename}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/tannerru/K3s_Manifests.git
+        targetRevision: HEAD
+        path: '{{path}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{path.basename}}'
+    
