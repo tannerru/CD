@@ -18,7 +18,7 @@ spec:
       
     spec:
       containers:
-      -env:
+      - env:
         - name: WEBPASSWORD
           value: password1
         - name: pihole
