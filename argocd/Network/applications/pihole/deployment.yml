@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: pihole
+  namespace: pihole
+  labels:
+    app: pihole
+
+spec:
+  selector:
+    matchLabels:
+      app: pihole
+  serviceName: pihole
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: pihole
+
+    spec:
+      containers:
+      - name: pihole
+        image: pihole/pihole:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - name: pihole-web
+          containerPort: 80
+          protocol: TCP
+        - name: pihole-dns-udp
+          containerPort: 53
+          protocol: UDP
+        - name: pihole-dns-tcp
+          containerPort: 53
+          protocol: TCP
+        volumeMounts:
+          - name: pihole-data
+            mountPath: /etc/pihole
+
+        envFrom:
+          - configMapRef:
+                name: pihole-config
+          - secretRef:
+                name: webui-password
+        livenessProbe:
+            httpGet:
+                path: /admin.index.php
+                port: pihole-web
+            initialDelaySeconds: 60
+            failureThreshold: 10
+            timeoutSeconds: 5
+
+        readinessProbe:
+            httpGet:
+                path: /admin.index.php
+                port: pihole-web
+            initialDelaySeconds: 60
+            failureThreshold: 3
+            timeoutSeconds: 5
+
+
+      volumes:
+        - name: pihole-data
+          persistentVolumeClaim:
+            claimName: pihole-pvc
