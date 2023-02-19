@@ -37,6 +37,8 @@ spec:
             mountPath: /etc/pihole
 
         envFrom:
+          - configMapRef:
+                name: pihole-config
           - secretRef:
                 name: webui-password
         livenessProbe:

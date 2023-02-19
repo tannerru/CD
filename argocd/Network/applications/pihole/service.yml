@@ -5,6 +5,7 @@ metadata:
   name: pihole-dns-udp
   namespace: pihole
 spec:
+  externalTrafficPolicy: Cluster
   selector:
     app: pihole
   ports:
@@ -21,6 +22,7 @@ metadata:
   name: pihole-web
   namespace: pihole
 spec:
+  externalTrafficPolicy: Cluster
   selector:
     app: pihole
   ports:
