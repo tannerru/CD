@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole-service
+  
+  namespace: network
+  labels:
+    app: pihole_service
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  - name: udp
+    port: 53
+    protocol: UDP
+    targetport: 53
+
+    
+  selector:    
+    app: pihole
+  type: LoadBalancer
+  loadBalancerIP: 10.0.40.166

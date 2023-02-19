@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole
+  namespace: network
+  labels:
+    dep: pihole-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pihole
+  template:
+    metadata:
+      labels:
+        app: pihole
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan-conf
+      
+    spec:
+      containers:
+        - name: pihole
+          
+          image: pihole/pihole
+          resources:
+            requests: 
+              memory: 2Gi
+              cpu: 1000m
+            limits:
+              memory: 4Gi
+              cpu: 2000m
+          ports:
+            - containerPort: 80
+            - containerPort: 53
+            - containerPort: 443
+            - containerPort: 67
+          volumeMounts:
+            - name: config
+              mountPath: /etc/pihole
+
+           
+
+            
+
+      volumes:  
+        - name: config
+          persistentVolumeClaim:
+             claimName: radarr-config
