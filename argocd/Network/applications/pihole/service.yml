@@ -16,7 +16,7 @@ spec:
   - name: udp
     port: 53
     protocol: UDP
-    targetport: 53
+    targetPort: 53
 
     
   selector:    
