@@ -12,6 +12,7 @@ spec:
       port: 53
       targetPort: 53
   type: LoadBalancer
+  loadBalancerIP: 10.0.40.167
 ---
 ## Pi-Hole Web
 apiVersion: v1
