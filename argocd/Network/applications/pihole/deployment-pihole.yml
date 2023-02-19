@@ -18,14 +18,13 @@ spec:
     type: RollingUpdate
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: pihole
     spec:
       containers:
       - env:
         - name: ServerIP
-          value: 192.168.1.101
+          value: 10.0.40.166
         - name: WEBPASSWORD
           valueFrom:
             secretKeyRef:

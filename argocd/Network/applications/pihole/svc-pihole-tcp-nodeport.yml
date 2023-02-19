@@ -20,3 +20,4 @@ spec:
     app: pihole
   sessionAffinity: None
   type: LoadBalancer
+  loadBalancerIP: 10.0.40.166
