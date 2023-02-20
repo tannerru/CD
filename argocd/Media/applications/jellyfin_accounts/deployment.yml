@@ -34,7 +34,7 @@ spec:
             - name: config
               mountPath: /data
 
-                    
-        - name: config
-          persistentVolumeClaim:
+       volumes:             
+       - name: config
+         persistentVolumeClaim:
              claimName: jellyfinaccount-config
