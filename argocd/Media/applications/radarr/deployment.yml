@@ -38,6 +38,9 @@ spec:
             - name: config
               mountPath: /config
 
+            - name: downloads
+              mountPath: /downloads
+
             
 
       volumes:
@@ -45,6 +48,12 @@ spec:
           nfs:
             server: 10.0.50.4
             path: /mnt/Slow/Media
+
+         
+        - name: downloads
+          nfs:
+            server: 10.0.50.4
+            path: /mnt/Slow/Downloads
 
         
             
