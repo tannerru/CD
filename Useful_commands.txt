@@ -44,3 +44,7 @@ spec:
 
 
     To restore longhorn backup, disable argocD auto sync, delete the app/stateful set, restore the disaster recovery volume, activate, create pvc with previous name, sync
+
+    #Sealed Secrets
+    kubeseal -f argocd/Network/applications/cloudflare/secrets/secret.yaml -o yaml > argocd/Network/applications/cloudflare/sealedsecrets/sealed-secret.yaml
+kubeseal -f secrets/secret.yml -o yaml > sealedsecrets/sealed-secret.yml
