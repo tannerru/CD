@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: homarr
+  namespace: network
+  labels:
+    dep: homarr-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: homarr
+  template:
+    metadata:
+      labels:
+        app: homarr
+      annotations:
+       
+      
+    spec:
+      containers:
+        - name: homarr
+          
+          image: ghcr.io/ajnart/homarr:latest
+          resources:
+            requests: 
+              memory: 1Gi
+              cpu: 200m
+            limits:
+              memory: 2Gi
+              cpu: 1000m
+          ports:
+            - containerPort: 7575
+          volumeMounts:
+            - name: config
+              mountPath: /app/data/configs
+
+            - name: config
+              mountPath: /app/public/icons
+
+            
+        - name: config
+          persistentVolumeClaim:
+             claimName: homarr-config
