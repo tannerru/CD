@@ -24,11 +24,11 @@ spec:
           image: fallenbagel/jellyseerr:develop
           resources:
             requests: 
-              memory: 2Gi
-              cpu: 1000m
+              memory: 500m
+              cpu: 500m
             limits:
               memory: 4Gi
-              cpu: 2000m
+             
           ports:
             - containerPort: 5055
           volumeMounts:

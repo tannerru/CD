@@ -24,11 +24,11 @@ spec:
           image: ghcr.io/linuxserver/jellyfin:latest
           resources:
             requests: 
-              memory: 2Gi
-              cpu: 1000m
+              memory: 500m
+              cpu: 500m
             limits:
               memory: 4Gi
-              cpu: 2000m
+              
           ports:
           - name: port8096
             containerPort: 8096

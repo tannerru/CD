@@ -24,11 +24,11 @@ spec:
           image: binhex/arch-sabnzbd
           resources:
             requests: 
-              memory: 2Gi
-              cpu: 1000m
+              memory: 500m
+              cpu: 500m
             limits:
               memory: 8Gi
-              cpu: 8000m
+             
           ports:
           - name: port8080
             containerPort: 8080

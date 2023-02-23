@@ -24,11 +24,11 @@ spec:
           image: linuxserver/sonarr
           resources:
             requests: 
-              memory: 2Gi
-              cpu: 1000m
+              memory: 500m
+              cpu: 500m
             limits:
               memory: 4Gi
-              cpu: 4000m
+             
           ports:
             - containerPort: 8989
           volumeMounts:
