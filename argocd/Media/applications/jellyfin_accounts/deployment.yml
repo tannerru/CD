@@ -23,11 +23,11 @@ spec:
           image: hrfee/jfa-go
           resources:
             requests: 
-              memory: 2Gi
-              cpu: 1000m
+              memory: 500m
+              cpu: 500m
             limits:
               memory: 4Gi
-              cpu: 2000m
+             
           ports:
             - containerPort: 8056
           volumeMounts:
