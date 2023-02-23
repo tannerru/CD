@@ -24,11 +24,11 @@ spec:
           image: ghcr.io/ajnart/homarr:latest
           resources:
             requests: 
-              memory: 1Gi
+              memory: 500m
               cpu: 200m
             limits:
               memory: 2Gi
-              cpu: 1000m
+             
           ports:
             - containerPort: 7575
           volumeMounts:
