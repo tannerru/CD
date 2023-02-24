@@ -36,17 +36,17 @@ spec:
             containerPort: 8090
         
           volumeMounts:
-            - name: downloads
-              mountPath: /downloads
+            - name: media
+              mountPath: media/downloads
 
             - name: config
               mountPath: /config
 
       volumes:
-        - name: downloads
+        - name: media
           nfs:
             server: 10.0.50.4
-            path: /mnt/Slow/Downloads
+            path: /mnt/Slow/Media
 
         - name: config
           persistentVolumeClaim:

@@ -36,12 +36,7 @@ spec:
               mountPath: /media
 
             - name: config
-              mountPath: /config
-
-            - name: downloads
-              mountPath: /downloads
-
-            
+              mountPath: /config  
 
       volumes:
         - name: media
@@ -49,14 +44,6 @@ spec:
             server: 10.0.50.4
             path: /mnt/Slow/Media
 
-         
-        - name: downloads
-          nfs:
-            server: 10.0.50.4
-            path: /mnt/Slow/Downloads
-
-        
-            
         - name: config
           persistentVolumeClaim:
              claimName: radarr-config
