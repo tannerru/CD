@@ -44,9 +44,9 @@ spec:
           - name: ENABLE_PRIVOXY
             value: "yes"
           - name: LAN_NETWORK
-            value: "10.0.40.0/24"
+            value: 10.0.40.0/24
           - name: NAME_SERVERS
-            value: "1.1.1.1"
+            value: 1.1.1.1
           - name: DELUGE_DAEMON_LOG_LEVEL
             value: info
           - name: DELUGE_WEB_LOG_LEVEL
