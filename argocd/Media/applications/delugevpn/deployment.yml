@@ -26,6 +26,7 @@ spec:
             capabilities:
              add:
                - NET_ADMIN
+               - CAP_SYS_ADMIN
           resources:
             requests: 
               memory: 500m
