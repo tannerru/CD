@@ -21,7 +21,7 @@ spec:
       containers:
         - name: prowlarr
           
-          image: lscr.io/linuxserver/prowlarr:latest
+          image: linuxserver/prowlarr:nightly
           resources:
             requests: 
               memory: 500m
