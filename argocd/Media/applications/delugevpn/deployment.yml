@@ -36,13 +36,13 @@ spec:
           - name: VPN_CLIENT
             value: wireguard
           - name: VPN_ENABLED
-            value: yes
+            value: "yes"
           - name: VPN_PROV
             value: custom
           - name: STRICT_PORT_FORWARD
-            value: yes
+            value: "yes"
           - name: ENABLE_PRIVOXY
-            value: yes
+            value: "yes"
           - name: LAN_NETWORK
             value: "10.0.40.0/24"
           - name: NAME_SERVERS
