@@ -33,6 +33,16 @@ spec:
             limits:
               memory: 8Gi
           env:
+          - name: VPN_USER
+            valueFrom:
+              secretKeyRef:
+                name: deluge-secret
+                key: VPN_USER
+          - name: VPN_PASS
+            valueFrom:
+              secretKeyRef: 
+                name: deluge-secret
+                key: VPN_PASS
           - name: VPN_CLIENT
             value: openvpn
           - name: VPN_ENABLED
