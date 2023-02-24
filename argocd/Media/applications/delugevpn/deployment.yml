@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: delugevpn
+  namespace: media
+  labels:
+    dep: delugevpn-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: delugevpn
+  template:
+    metadata:
+      labels:
+        app: delugevpn
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan-conf
+      
+    spec:
+      containers:
+        - name: delugevpn
+          
+          image: binhex/arch-delugevpn
+          cap_add:
+            - NET_ADMIN
+          resources:
+            requests: 
+              memory: 500m
+              cpu: 500m
+            limits:
+              memory: 8Gi
+          env:
+         - name: VPN_CLIENT
+           value: wireguard
+         - name: VPN_ENABLED
+           value: yes
+         - name: VPN_PROV
+           value: custom
+         - name: STRICT_PORT_FORWARD
+           values: yes
+         - name: ENABLE_PRIVOXY
+           value: yes
+         - name: LAN_NETWORK
+           value: 10.0.40.0/24
+         - name: NAME_SERVERS
+           value: 1.1.1.1
+         - name: DELUGE_DAEMON_LOG_LEVEL
+           value: info
+         - name: DELUGE_WEB_LOG_LEVEL
+           value: info
+         - name: DEBUG 
+           value: false
+         - name: UMASK
+         - name: PUID
+         - name: PGID
+
+             
+         ports:
+          - name: port8112
+            containerPort: 8112
+          - name: port8118
+            containerPort: 8118
+          - name: port58846
+            containerPort: 58846
+          - name: port58946
+            containerPort: 58946
+        
+         volumeMounts:
+            - name: media
+              mountPath: /media/Downloads
+
+            - name: config
+              mountPath: /config
+
+      volumes:
+        - name: media
+          nfs:
+            server: 10.0.50.4
+            path: /mnt/Slow/Media/Downloads
+
+        - name: config
+          persistentVolumeClaim:
+             claimName: delugevpn-config
