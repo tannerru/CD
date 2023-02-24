@@ -34,7 +34,7 @@ spec:
               memory: 8Gi
           env:
           - name: VPN_CLIENT
-            value: wireguard
+            value: openvpn
           - name: VPN_ENABLED
             value: "yes"
           - name: VPN_PROV
