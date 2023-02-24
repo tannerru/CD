@@ -1,0 +1,41 @@
+apiVersion: appdeploys/v1
+kind: Deployment
+metadata:
+  name: prowlarr
+  namespace: media
+  labels:
+    dep: prowlarr-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: prowlarr
+  template:
+    metadata:
+      labels:
+        app: prowlarr
+      annotations:
+      
+      
+    spec:
+      containers:
+        - name: prowlarr
+          
+          image: lscr.io/linuxserver/prowlarr:latest
+          resources:
+            requests: 
+              memory: 500m
+              cpu: 500m
+            limits:
+              memory: 4Gi
+              
+          ports:
+            - containerPort: 9696
+        
+            - name: config
+              mountPath: /config  
+
+    
+        - name: config
+          persistentVolumeClaim:
+             claimName: prowlarr-config
