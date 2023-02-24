@@ -31,11 +31,11 @@ spec:
               
           ports:
             - containerPort: 9696
-        
+          volumeMounts:
             - name: config
               mountPath: /config  
 
-    
+      volumes:
         - name: config
           persistentVolumeClaim:
              claimName: prowlarr-config
