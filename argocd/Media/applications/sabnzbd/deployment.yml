@@ -37,7 +37,7 @@ spec:
         
           volumeMounts:
             - name: media
-              mountPath: media/downloads
+              mountPath: media/Downloads
 
             - name: config
               mountPath: /config
