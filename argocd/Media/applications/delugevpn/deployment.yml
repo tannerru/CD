@@ -36,7 +36,7 @@ spec:
           - name: VPN_CLIENT
             value: openvpn
           - name: VPN_ENABLED
-            value: "no"
+            value: "yes"
           - name: VPN_PROV
             value: custom
           - name: STRICT_PORT_FORWARD
