@@ -31,32 +31,30 @@ spec:
             limits:
               memory: 8Gi
           env:
-         - name: VPN_CLIENT
-           value: wireguard
-         - name: VPN_ENABLED
-           value: yes
-         - name: VPN_PROV
-           value: custom
-         - name: STRICT_PORT_FORWARD
-           values: yes
-         - name: ENABLE_PRIVOXY
-           value: yes
-         - name: LAN_NETWORK
-           value: 10.0.40.0/24
-         - name: NAME_SERVERS
-           value: 1.1.1.1
-         - name: DELUGE_DAEMON_LOG_LEVEL
-           value: info
-         - name: DELUGE_WEB_LOG_LEVEL
-           value: info
-         - name: DEBUG 
-           value: false
-         - name: UMASK
-         - name: PUID
-         - name: PGID
+          - name: VPN_CLIENT
+            value: wireguard
+          - name: VPN_ENABLED
+            value: yes
+          - name: VPN_PROV
+            value: custom
+          - name: STRICT_PORT_FORWARD
+            value: yes
+          - name: ENABLE_PRIVOXY
+            value: yes
+          - name: LAN_NETWORK
+            value: 10.0.40.0/24
+          - name: NAME_SERVERS
+            value: 1.1.1.1
+          - name: DELUGE_DAEMON_LOG_LEVEL
+            value: info
+          - name: DELUGE_WEB_LOG_LEVEL
+            value: info
+          - name: UMASK
+          - name: PUID
+          - name: PGID
 
              
-         ports:
+          ports:
           - name: port8112
             containerPort: 8112
           - name: port8118
@@ -66,7 +64,7 @@ spec:
           - name: port58946
             containerPort: 58946
         
-         volumeMounts:
+          volumeMounts:
             - name: media
               mountPath: /media/Downloads
 
