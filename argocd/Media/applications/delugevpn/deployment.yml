@@ -24,8 +24,8 @@ spec:
           image: binhex/arch-delugevpn
           securityContext:
             sysctls:
-             - name: sysctl="net.ipv4.conf.all.src_valid_mark=1" 
-               value: 1
+            - name: sysctl="net.ipv4.conf.all.src_valid_mark=1" 
+              value: 1
             privileged: true 
             capabilities:
              add:
