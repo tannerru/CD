@@ -63,7 +63,6 @@ spec:
             value: info
           - name: DELUGE_WEB_LOG_LEVEL
             value: info
-          - name: UMASK
           - name: PUID
             value: "1000"
           - name: PGID

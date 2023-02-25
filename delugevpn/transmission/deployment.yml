@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: transmission
+  namespace: media
+  labels:
+    dep: transmission-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: transmission
+  template:
+    metadata:
+      labels:
+        app: transmission
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan-conf
+      
+    spec:
+      containers:
+        - name: transmission
+          
+          image: linuxserver/transmission:version-3.00-r5
+          resources:
+            requests: 
+              memory: 500m
+              cpu: 500m
+            limits:
+              memory: 4Gi
+              
+          ports:
+            - containerPort: 9091
+          volumeMounts:
+            - name: media
+              mountPath: /media
+
+            - name: config
+              mountPath: /config  
+
+      volumes:
+        - name: media
+          nfs:
+            server: 10.0.50.4
+            path: /mnt/Slow/Media
+
+        - name: config
+          persistentVolumeClaim:
+             claimName: transmission-config
