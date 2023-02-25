@@ -37,6 +37,9 @@ spec:
 
             - name: config
               mountPath: /config  
+            
+            - name: wireguard
+              mountPath: ./wg0.conf:/config/wg0.conf
 
       volumes:
         - name: media
