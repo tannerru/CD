@@ -14,8 +14,7 @@ spec:
     metadata:
       labels:
         app: delugevpn
-      annotations:
-        k8s.v1.cni.cncf.io/networks: macvlan-conf
+     
       
     spec:
       containers:
@@ -86,7 +85,7 @@ spec:
       volumes:
         - name: media
           nfs:
-            server: 10.0.50.4
+            server: 10.0.40.4
             path: /mnt/Slow/Media/Downloads
 
         - name: config
