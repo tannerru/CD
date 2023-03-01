@@ -38,8 +38,8 @@ spec:
         image: inductiveautomation/ignition:8.1.17
         resources:
           requests:
-            memory: 200m
-            cpu: 500m
+            memory: 200n
+            cpu: 200m
           limits:
             memory: 2Gi
 
