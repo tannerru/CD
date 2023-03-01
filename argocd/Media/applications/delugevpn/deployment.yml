@@ -14,8 +14,7 @@ spec:
     metadata:
       labels:
         app: delugevpn
-      annotations:
-        k8s.v1.cni.cncf.io/networks: macvlan-conf
+     
       
     spec:
       containers:
@@ -23,9 +22,9 @@ spec:
           
           image: binhex/arch-delugevpn
           securityContext:
-            capabilities:
-             add:
-               - NET_ADMIN
+            privileged: true 
+          
+              
           resources:
             requests: 
               memory: 500m
@@ -33,8 +32,18 @@ spec:
             limits:
               memory: 8Gi
           env:
+          - name: VPN_USER
+            valueFrom:
+              secretKeyRef:
+                name: deluge-secret
+                key: VPN_USER
+          - name: VPN_PASS
+            valueFrom:
+              secretKeyRef: 
+                name: deluge-secret
+                key: VPN_PASS
           - name: VPN_CLIENT
-            value: openvpn
+            value: wireguard
           - name: VPN_ENABLED
             value: "yes"
           - name: VPN_PROV
@@ -42,22 +51,20 @@ spec:
           - name: STRICT_PORT_FORWARD
             value: "yes"
           - name: ENABLE_PRIVOXY
-            value: "yes"
+            value: "no"
           - name: LAN_NETWORK
-            value: 10.0.40.0/24
+            value: 0.0.0.0/24
           - name: NAME_SERVERS
-            value: 1.1.1.1
+            value: 8.8.8.8
           - name: DELUGE_DAEMON_LOG_LEVEL
             value: info
           - name: DELUGE_WEB_LOG_LEVEL
             value: info
-          - name: UMASK
           - name: PUID
             value: "1000"
           - name: PGID
             value: "1000"
-
-             
+ 
           ports:
           - name: port8112
             containerPort: 8112
@@ -78,7 +85,7 @@ spec:
       volumes:
         - name: media
           nfs:
-            server: 10.0.50.4
+            server: 10.0.40.4
             path: /mnt/Slow/Media/Downloads
 
         - name: config
