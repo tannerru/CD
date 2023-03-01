@@ -2,6 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: mariadb-configmap
+  namespace: scada
 data:
 
   primary.cnf: |
@@ -25,6 +26,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: mariadb-service
+  namespace: scada
   labels:
     app: mariadb
 spec:
@@ -41,6 +43,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: mariadb-sts
+  namespace: scada
 spec:
   serviceName: "mariadb-service"
   replicas: 3
@@ -104,6 +107,7 @@ spec:
   volumeClaimTemplates:
   - metadata:
       name: datadir
+      namespace: scada
     spec:
       accessModes: ["ReadWriteOnce"]
       storageClassName: default
