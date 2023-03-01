@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: scadabackend-service
+
+  namespace: scada
+  labels:
+    app: scadabackend_service
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: port8088
+    port: 8088
+    protocol: TCP
+    targetPort: 8088
+  - name: port8043
+    port: 8043
+    protocol: TCP
+    targetPort: 8043
+  - name: port8060
+    port: 8060
+    targetPort: 8060
+
+
+  selector:
+    app: scada-backend
+  sessionAffinity: ClientIP
+  type: LoadBalancer

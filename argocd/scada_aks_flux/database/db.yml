@@ -1,0 +1,112 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mariadb-configmap
+data:
+
+  primary.cnf: |
+    [mariadb]
+    log-bin                         # enable binary logging
+    log-basename=my-mariadb         # used to be independent of hostname changes (otherwise is in datadir/mysql)
+
+  replica.cnf: |
+    [mariadb]
+    log-basename=my-mariadb         # used to be independent of hostname changes (otherwise is in datadir/mysql)
+
+  primary.sql: |
+    CREATE USER 'repluser'@'%' IDENTIFIED BY 'replsecret';
+    GRANT REPLICATION REPLICA ON *.* TO 'repluser'@'%';
+    CREATE DATABASE ignition_db;
+
+  secondary.sql: "# We have to know name of sts (`mariadb-sts`) and \n# service `mariadb-service` in advance as an FQDN.\n# No need to use master_port\nCHANGE MASTER TO \nMASTER_HOST='mariadb-sts-0.mariadb-service.scada.svc.cluster.local',\nMASTER_USER='repluser',\nMASTER_PASSWORD='replsecret',\nMASTER_CONNECT_RETRY=10;\n#magic___^_^___line\n#magic___^_^___line\n"
+# Headless service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mariadb-service
+  labels:
+    app: mariadb
+spec:
+  ports:
+  - port: 3306
+    name: mariadb-port
+  clusterIP: None
+  selector:
+    app: mariadb
+
+# Statefulset
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: mariadb-sts
+spec:
+  serviceName: "mariadb-service"
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mariadb
+  template:
+    metadata:
+      labels:
+        app: mariadb
+    spec:
+      initContainers:
+      - name: init-mariadb
+        image: mariadb
+        imagePullPolicy: Always
+        command:
+        - bash
+        - "-c"
+        - "set -ex\necho 'Starting init-mariadb';\n# Check config map to directory that already exists \n# (but must be used as a volume for main container)\nls /mnt/config-map\n# Statefulset has sticky identity, number should be last\n[[ `hostname` =~ -([0-9]+)$ ]] || exit 1\nordinal=${BASH_REMATCH[1]}\n# Copy appropriate conf.d files from config-map to \n# mariadb-config volume (emptyDir) depending on pod number\nif [[ $ordinal -eq 0 ]]; then\n  # This file holds SQL for connecting to primary\n  cp /mnt/config-map/primary.cnf /etc/mysql/conf.d/server-id.cnf\n  # Create the users needed for replication on primary on a volume\n  # initdb (emptyDir)\n  cp /mnt/config-map/primary.sql /docker-entrypoint-initdb.d\nelse\n  # This file holds SQL for connecting to secondary\n  cp /mnt/config-map/replica.cnf /etc/mysql/conf.d/server-id.cnf\n  # On replicas use secondary configuration on initdb volume\n  cp /mnt/config-map/secondary.sql /docker-entrypoint-initdb.d\nfi\n# Add an offset to avoid reserved server-id=0 value.\necho server-id=$((3000 + $ordinal)) >> etc/mysql/conf.d/server-id.cnf\nls /etc/mysql/conf.d/\ncat /etc/mysql/conf.d/server-id.cnf\n"
+        volumeMounts:
+        - name: mariadb-config-map
+          mountPath: /mnt/config-map
+        - name: mariadb-config
+          mountPath: /etc/mysql/conf.d/
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+      restartPolicy: Always
+      containers:
+      - name: mariadb
+        image: mariadb
+        ports:
+        - containerPort: 3306
+          name: mariadb-port
+        env:
+        # Using Secrets
+        - name: MARIADB_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mariadb-secret
+              key: mariadb-root-password
+        - name: MYSQL_INITDB_SKIP_TZINFO
+          value: "1"
+        # Mount volume from persistent volume claim
+        volumeMounts:
+        - name: datadir
+          mountPath: /var/lib/mysql/
+        - name: mariadb-config
+          mountPath: /etc/mysql/conf.d/
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+      volumes:
+      - name: mariadb-config-map
+        configMap:
+          name: mariadb-configmap
+          #defaultMode: 0544
+      - name: mariadb-config
+        emptyDir: {}
+      - name: initdb
+        emptyDir: {}
+
+  volumeClaimTemplates:
+  - metadata:
+      name: datadir
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: default
+      resources:
+        requests:
+          storage: 5Gi
