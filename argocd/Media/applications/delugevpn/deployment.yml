@@ -61,9 +61,11 @@ spec:
           - name: DELUGE_WEB_LOG_LEVEL
             value: info
           - name: PUID
-            value: "1000"
+            value: "0"
           - name: PGID
-            value: "1000"
+            value: "0"
+          - name: UMASK
+            value: "000"
  
           ports:
           - name: port8112
