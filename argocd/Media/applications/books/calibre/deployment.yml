@@ -21,7 +21,7 @@ spec:
       containers:
         - name: calibre
           
-          image: ghcr.io/linuxserver/calibre-web
+          image: ghcr.io/linuxserver/calibre
           resources:
             requests: 
               memory: 500m
