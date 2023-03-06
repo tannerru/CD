@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: calibre
+  namespace: media
+  labels:
+    dep: calibre-deploy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: calibre
+  template:
+    metadata:
+      labels:
+        app: calibre
+      annotations:
+        k8s.v1.cni.cncf.io/networks: macvlan-conf
+      
+    spec:
+      containers:
+        - name: calibre
+          
+          image: ghcr.io/linuxserver/calibre-web
+          resources:
+            requests: 
+              memory: 500m
+              cpu: 500m
+            limits:
+              memory: 8Gi
+             
+          ports:
+          - name: port8080
+            containerPort: 8080
+          - name: port8081
+            containerPort: 8081
+        
+          volumeMounts:
+            - name: books
+              mountPath: /books
+            - name: config
+              mountPath: /config
+
+      volumes:
+        - name: media
+          nfs:
+            server: 10.0.50.4
+            path: /mnt/Slow/Media
+
+        - name: config
+          persistentVolumeClaim:
+             claimName: calibre-config
