@@ -21,7 +21,7 @@ spec:
       containers:
         - name: readarr
           
-          image: ghcr.io/linuxserver/readarr
+          image: linuxserver/readarr
           resources:
             requests: 
               memory: 500m
