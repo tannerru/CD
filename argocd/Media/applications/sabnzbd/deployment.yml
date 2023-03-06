@@ -42,11 +42,20 @@ spec:
             - name: config
               mountPath: /config
 
+            - name: books
+              mountPath: /books
+
       volumes:
         - name: media
           nfs:
             server: 10.0.50.4
             path: /mnt/Slow/Media/Downloads
+
+      
+        - name: books
+          nfs:
+            server: 10.0.50.4
+            path: /mnt/Slow/Media/books
 
         - name: config
           persistentVolumeClaim:
