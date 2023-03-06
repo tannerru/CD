@@ -14,8 +14,7 @@ spec:
     metadata:
       labels:
         app: readarr
-      annotations:
-        k8s.v1.cni.cncf.io/networks: macvlan-conf
+     
       
     spec:
       containers:
@@ -43,7 +42,7 @@ spec:
       volumes:
         - name: books
           nfs:
-            server: 10.0.50.4
+            server: 10.0.40.4
             path: /mnt/Slow/Media/books
 
         - name: config
