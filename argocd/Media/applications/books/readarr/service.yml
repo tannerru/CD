@@ -10,14 +10,10 @@ spec:
   externalTrafficPolicy: Cluster
   ports:
   - name: http
-    port: 8080
+    port: 8787
     protocol: TCP
-    targetPort: 8080
-  - name: http2
-    port: 8090
-    protocol: TCP
-    targetPort: 8090
-   
+    targetPort: 8787
+  
   selector:    
     app: readarr
   type: LoadBalancer
