@@ -21,7 +21,7 @@ spec:
       containers:
         - name: calibre-web-web
           
-          image: lscr.io/linuxserver/calibre-web:latest
+          image: lscr.io/linuxserver/calibre-web:version-0.6.12
           resources:
             requests: 
               memory: 500m
