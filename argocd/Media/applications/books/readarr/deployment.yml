@@ -35,14 +35,13 @@ spec:
         
         
           volumeMounts:
-            - name: media
+            - name: books
               mountPath: /books
             - name: config
               mountPath: /config
 
       volumes:
-        - name: media
-          nfs:
+        - name: books
             server: 10.0.50.4
             path: /mnt/Slow/Media/books
 
