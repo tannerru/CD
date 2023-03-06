@@ -21,7 +21,7 @@ spec:
       containers:
         - name: readarr
           
-          image: ghcr.io/linuxserver/readarr:nightly
+          image: ghcr.io/linuxserver/readarr
           resources:
             requests: 
               memory: 500m
@@ -40,8 +40,9 @@ spec:
             - name: config
               mountPath: /config
 
-      volumes:
+       volumes:
         - name: books
+          nfs:
             server: 10.0.50.4
             path: /mnt/Slow/Media/books
 
