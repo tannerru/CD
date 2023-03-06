@@ -10,7 +10,7 @@ spec:
   externalTrafficPolicy: Cluster
   ports:
   - name: http
-    port: 8787
+    port: 80
     protocol: TCP
     targetPort: 8787
   
