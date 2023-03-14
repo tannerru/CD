@@ -50,7 +50,7 @@ spec:
           nfs:
             server: 10.0.50.4
             path: /mnt/Slow/Media
-            nfsvers: "4.1"
+            
             
         - name: config
           persistentVolumeClaim:
