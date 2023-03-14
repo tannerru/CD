@@ -20,11 +20,10 @@ spec:
     spec:
       containers:
         - name: sonarr
-          environment:
-           - PUID=0
-           - PGID=0
-          
           image: linuxserver/sonarr
+          securityContext:
+           runAsUser: 0
+           runAsGroup: 0
           resources:
             requests: 
               memory: 500m
