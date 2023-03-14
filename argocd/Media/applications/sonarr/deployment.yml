@@ -51,9 +51,7 @@ spec:
             server: 10.0.50.4
             path: /mnt/Slow/Media
             nfsvers: "4.1"
-            mountOptions:
-              - "nolock"
-
+            
         - name: config
           persistentVolumeClaim:
              claimName: sonarr-config
