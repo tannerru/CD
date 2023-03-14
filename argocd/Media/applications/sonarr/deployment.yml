@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
         - name: sonarr
-          image: linuxserver/sonarr
+          image: linuxserver/sonarr:3.0.9
           resources:
             requests: 
               memory: 500m
