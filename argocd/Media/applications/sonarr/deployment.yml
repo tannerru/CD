@@ -21,8 +21,8 @@ spec:
       containers:
         - name: sonarr
           environment:
-          - PUID=0
-          - PGID=0
+           - PUID=0
+           - PGID=0
           
           image: linuxserver/sonarr
           resources:
