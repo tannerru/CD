@@ -21,7 +21,6 @@ spec:
       containers:
         - name: sonarr
           image: linuxserver/sonarr
-          securityContext:
           resources:
             requests: 
               memory: 500m
