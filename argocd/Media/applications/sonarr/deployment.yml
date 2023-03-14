@@ -49,7 +49,7 @@ spec:
         - name: media
           nfs:
             server: 10.0.50.4
-            path: /mnt/Slow/ISO
+            path: /mnt/Slow/Media
 
         - name: config
           persistentVolumeClaim:
