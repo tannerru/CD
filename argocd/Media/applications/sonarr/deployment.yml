@@ -27,6 +27,13 @@ spec:
               cpu: 500m
             limits:
               memory: 4Gi
+          env:
+          - name: PUID
+            value: "0"
+          - name: PGID
+            value: "0"
+          - name: UMASK
+            value: "000"
              
           ports:
             - containerPort: 8989
